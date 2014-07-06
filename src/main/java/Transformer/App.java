@@ -13,7 +13,13 @@ public class App {
         public long getValue() { return direction; }
     }
 
-     protected void convert2text(InputStream in, OutputStream out) throws IOException {
+    /**
+     * Convert input binary data into hexadecimal text.
+     * @param in binary data InputStream
+     * @param out text output OutputStream
+     * @throws IOException
+     */
+     protected void convert2text(final InputStream in, final OutputStream out) throws IOException {
         byte[] buffer = new byte[1];
         while ((buffer[0] = (byte) in.read()) != -1) {
             adjust(buffer, Direction.FORWARD);
@@ -21,7 +27,7 @@ public class App {
         }
     }
 
-    protected void convert2dat(InputStream in, OutputStream out) throws IOException {
+    protected void convert2dat(final InputStream in, final OutputStream out) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String line;
         while ((line = reader.readLine()) != null) {
@@ -31,7 +37,7 @@ public class App {
         }
     }
 
-    private void adjust(byte[] buffer, Direction direction) {
+    private void adjust(final byte[] buffer, final Direction direction) {
         for (int i = 0; i < buffer.length; i++) {
             adjustment += delta;
             long value = (long)buffer[i] + (direction.getValue() * adjustment);
@@ -41,7 +47,12 @@ public class App {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    /**
+     * Command line application to invoke transformations.
+     * @param args command line parameters.
+     * @throws IOException
+     */
+    public static void main(final String[] args) throws IOException {
         App app = new App();
 
         if (args.length == 1) {
